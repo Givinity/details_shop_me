@@ -12,6 +12,7 @@ class Details(models.Model):
     content = models.TextField(blank=True)
     photo = models.ImageField(upload_to='photos/%d/%m/%Y')
     published_or_not = models.BooleanField(default=True)
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
