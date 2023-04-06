@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'details_shop_me.apps.detailapp.apps.DetailappConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,8 @@ ROOT_URLCONF = 'details_shop_me.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': []
+        'DIRS': [os.path.join(BASE_DIR, 'details_shop_me', 'apps', 'detailapp',
+                              'templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

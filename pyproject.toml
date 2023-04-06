@@ -8,6 +8,7 @@ authors = ["givinity <SaZh.user@gmail.com>"]
 python = "^3.10"
 Django = "^4.2"
 psycopg = "^3.1.8"
+Pillow = "^9.5.0"
 
 [tool.poetry.dev-dependencies]
 
