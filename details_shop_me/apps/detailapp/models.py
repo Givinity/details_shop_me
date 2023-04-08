@@ -22,6 +22,8 @@ class Details(models.Model):
         return reverse('detail', kwargs={'detail_slug': self.slug})
 
     class Meta:
+        verbose_name = 'Деталь'
+        verbose_name_plural = 'Детали'
         ordering = ['time_create', ]
 
 
@@ -41,3 +43,5 @@ class Category(models.Model):
 
     class Meta:
         ordering = ['id', ]
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
