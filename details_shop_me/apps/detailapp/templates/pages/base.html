@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-
-    </header>
+    <div class="container">
+      <h1>Запчасти для автомобилей</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Главная</a></li>
+          <li><a href="#">Каталог</a></li>
+          <li><a href="#">О нас</a></li>
+          <li><a href="#">Контакты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
     {% block content %}
 {#        Какое-то заполнение#}
     {% endblock %}
+    <footer>
+        <div class="container">
+            <p>© 2023 Запчасти для автомобилей.</p>
+        </div>
+    </footer>
 </body>
 </html>

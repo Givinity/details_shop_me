@@ -1,4 +1,45 @@
 {% extends 'pages/base.html' %}
 {%  block content %}
-    <h1>awfawfffffff</h1>
+    <main>
+    <section class="featured">
+      <div class="container">
+        <h2>Популярные товары</h2>
+        <div class="products">
+          <div class="product">
+            <img src="path/to/image1.jpg" alt="Product 1">
+            <h3>Название товара</h3>
+            <p>Описание товара.</p>
+            <span class="price">1000 руб.</span>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div class="product">
+            <img src="path/to/image2.jpg" alt="Product 2">
+            <h3>Название товара</h3>
+            <p>Описание товара.</p>
+            <span class="price">1500 руб.</span>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+          <div class="product">
+            <img src="path/to/image3.jpg" alt="Product 3">
+            <h3>Название товара</h3>
+            <p>Описание товара.</p>
+            <span class="price">2000 руб.</span>
+            <button class="add-to-cart">Добавить в корзину</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="categories">
+      <div class="container">
+        <h2>Категории товаров</h2>
+        <ul>
+          <li><a href="#">Двигатель</a></li>
+          <li><a href="#">Трансмиссия</a></li>
+          <li><a href="#">Сцепление</a></li>
+          <li><a href="#">Тормозная система</a></li>
+          <li><a href="#">Ходовая часть</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
 {%  endblock %}
