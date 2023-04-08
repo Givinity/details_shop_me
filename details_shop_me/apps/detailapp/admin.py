@@ -15,6 +15,7 @@ class DetailsAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name') # для отображения по нажатию
     list_display_links = ('id', 'name') # кликабельные ид и имя
+    prepopulated_fields = {'slug': ('name',)}
 
 
 admin.site.register(Details, DetailsAdmin)

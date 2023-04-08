@@ -6,11 +6,12 @@ class Details(models.Model):
     """"Сами детали от определенной марки автомобиля"""
     name = models.CharField(max_length=255, db_index=True,
                             verbose_name='Название')
+    price = models.IntegerField(default=1000)
     time_create = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
     content = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='photos/%d/%m/%Y')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d')
     published_or_not = models.BooleanField(default=True)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
 

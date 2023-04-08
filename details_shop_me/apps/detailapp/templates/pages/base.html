@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }}</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{% static 'detailapp/css/style.css' %}">
 </head>
 <body>
     <header>
@@ -12,11 +13,13 @@
       <h1>Запчасти для автомобилей</h1>
       <nav>
         <ul>
-          <li><a href="#">Главная</a></li>
-          <li><a href="#">Каталог</a></li>
-          <li><a href="#">О нас</a></li>
-          <li><a href="#">Контакты</a></li>
+            {% for m in menu %}
+                <li><a href="{% url m.url_name %}">{{ m.title }}</a></li>
+            {% endfor %}
         </ul>
+        <a class="cart" href="{% url 'cart' %}">
+             <img src="{% static 'detailapp/image/cart.png' %}" alt="Корзина">
+        </a>
       </nav>
     </div>
   </header>
