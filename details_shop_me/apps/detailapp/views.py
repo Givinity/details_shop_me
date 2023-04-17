@@ -33,10 +33,30 @@ class IndexView(DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
+        c = Category.objects.get(slug=self.kwargs['cat_slug'])
         return context
 
     def get_queryset(self):
         return Details.objects.filter(published_or_not=True)
+
+
+class DetailsCategory(ListView):
+    model = Details
+    template_name = 'pages/index.html'
+    context_object_name = 'posts'
+    allow_empty = False
+    def get_queryset(self):
+        return Details.objects.filter(cat__slug=self.kwargs['cat_slug'],
+                                      published_or_not=True)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        cats = Category.objects.all()
+        context['cats'] = cats
+        return context
+
+
+
 def catalog(request):
     return render(request, 'pages/catalog.html')
 

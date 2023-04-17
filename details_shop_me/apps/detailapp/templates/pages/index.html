@@ -21,11 +21,9 @@
       <div class="container">
         <h2>Категории товаров</h2>
         <ul>
-          <li><a href="#">Двигатель</a></li>
-          <li><a href="#">Трансмиссия</a></li>
-          <li><a href="#">Сцепление</a></li>
-          <li><a href="#">Тормозная система</a></li>
-          <li><a href="#">Ходовая часть</a></li>
+            {% for c in cats %}
+                <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+            {% endfor %}
         </ul>
       </div>
     </section>
