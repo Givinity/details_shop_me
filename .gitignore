@@ -1,2 +1,7 @@
 .media
 /.env
+.idea
+*.pyc
+/media/
+/details_shop_me/apps/detailapp/migrations/
+/details_shop_me/apps/cart/migrations/
