@@ -84,14 +84,6 @@ def contacts(request):
     return render(request, 'pages/contacts.html')
 
 
-class Cart_user(LoginRequiredMixin, TemplateView):
-    """
-    Корзина для покупок
-    """
-    template_name = 'pages/cart.html'
-    login_url = reverse_lazy('login')
-
-
 class RegisterUser(DataMixin, CreateView):
     """
     Регистрация пользователей

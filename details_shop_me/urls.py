@@ -23,7 +23,8 @@ from details_shop_me import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('detailapp.urls'))
+    path('', include('detailapp.urls')),
+    path('cart/', include('cart.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

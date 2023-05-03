@@ -14,6 +14,8 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
+from details_shop_me.apps import detailapp
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'detailapp.apps.DetailappConfig',
+    'cart.apps.CartConfig',
 ]
 
 MIDDLEWARE = [
