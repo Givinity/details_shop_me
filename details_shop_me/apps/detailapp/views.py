@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
@@ -62,6 +60,7 @@ class Catalog(TemplateView):
     template_name = 'pages/catalog.html'
     allow_empty = False
 
+
 class ShowDetail(DataMixin, DetailView):
     """
     Отображение информации о детали
@@ -75,6 +74,7 @@ class ShowDetail(DataMixin, DetailView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title=context['detail'])
         return dict(list(context.items()) + list(c_def.items()))
+
 
 def info(request):
     return render(request, 'pages/info.html')
@@ -132,7 +132,3 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
-
-
-
-

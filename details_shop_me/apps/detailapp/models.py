@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from django.contrib.auth.models import User
 
 
 class Details(models.Model):
@@ -47,6 +46,3 @@ class Category(models.Model):
         ordering = ['id', ]
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
-
-
-
