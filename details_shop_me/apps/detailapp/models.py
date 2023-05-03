@@ -36,7 +36,7 @@ class Category(models.Model):
                             verbose_name='URL')
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
     def get_absolute_url(self):
         """"Ссылка на категорию"""
