@@ -118,10 +118,17 @@ color: #fff;
 padding: 1rem 0;
 }
 footer p {
-margin: 0;
-text-align: center;
+  margin: 0;
+  text-align: center;
 }
 .cart img {
   max-width: 1.5rem;
   float: right;
+}
+.last {
+  text-align: right;
+}
+.form-input {
+  display: block;
+  margin-top: 0em;
 }
