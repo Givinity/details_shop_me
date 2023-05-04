@@ -1,11 +1,10 @@
 {% extends 'pages/base.html' %}
 {% block content %}
     <main>
-        <div class="searching" style="width: 90%; height: 100%; position: absolute; margin: 0 0 0 75px;">
-            <form action="{% url 'search' %}" method="get" class="">
-                <input size="100%" type="search" type="text" name="q" placeholder="Поиск детали">
+        <div class="searching">
+            <form action="{% url 'search' %}" method="get">
+                <input size="100%" name="q" placeholder="Поиск детали">
                 <button type="submit"> Найти</button>
-
             </form>
         </div>
         <section class="featured">

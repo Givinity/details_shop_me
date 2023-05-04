@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
 from .forms import RegisterUserForm, LoginUserForm
@@ -126,15 +125,20 @@ def logout_user(request):
     return redirect('login')
 
 
-class Search(ListView):
-
+class Search(DataMixin, ListView):
+    """
+    Поиск по товарам
+    """
     template_name = 'pages/index.html'
     context_object_name = 'posts'
 
     def get_queryset(self):
         return Details.objects.filter(name__icontains=self.request.GET.get('q'))
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['q'] = self.request.GET.get('q')
+        c_def = self.get_user_context(title='Поиск - ' +
+                                            str(context['q']))
+        context = dict(list(context.items()) + list(c_def.items()))
         return context

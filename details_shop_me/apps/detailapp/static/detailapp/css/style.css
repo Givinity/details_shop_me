@@ -132,3 +132,31 @@ footer p {
   display: block;
   margin-top: 0em;
 }
+.searching {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.searching form {
+  display: flex;
+  align-items: center;
+}
+.searching input {
+  margin-right: 0px;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px 0 0 5px;
+  border: none;
+}
+.searching button {
+  font-size: 16px;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
