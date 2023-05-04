@@ -1,34 +1,41 @@
 {% extends 'pages/base.html' %}
-{%  block content %}
+{% block content %}
     <main>
-    <section class="featured">
-      <div class="container">
-        <h2>Популярные товары</h2>
-        <div class="products">
-            {% for post in posts %}
-          <div class="product">
-            <img src="{{ post.photo.url }}" alt="Product 1">
-            <h3>{{ post.title }}</h3>
-            <p>{{ post.content | truncatewords:5 }}</p>
-            <span class="price">{{ post.price }} руб.</span>
-            <button class="add-to-cart">Добавить в корзину</button>
-              <br>
-            <a href="{{ post.get_absolute_url }}">Подробнее</a>
-                <br>
-          </div>
-            {% endfor %}
+        <div class="searching" style="width: 90%; height: 100%; position: absolute; margin: 0 0 0 75px;">
+            <form action="{% url 'search' %}" method="get" class="">
+                <input size="100%" type="search" type="text" name="q" placeholder="Поиск детали">
+                <button type="submit"> Найти</button>
+
+            </form>
         </div>
-      </div>
-    </section>
-    <section class="categories">
-      <div class="container">
-        <h2>Категории товаров</h2>
-        <ul>
-            {% for c in cats %}
-                <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
-            {% endfor %}
-        </ul>
-      </div>
-    </section>
-  </main>
-{%  endblock %}
+        <section class="featured">
+            <div class="container">
+                <h2>Популярные товары</h2>
+                <div class="products">
+                    {% for post in posts %}
+                        <div class="product">
+                            <img src="{{ post.photo.url }}" alt="Product 1">
+                            <h3>{{ post.name }}</h3>
+                            <p>{{ post.content | truncatewords:5 }}</p>
+                            <span class="price">{{ post.price }} руб.</span>
+                            <button class="add-to-cart">Добавить в корзину</button>
+                            <br>
+                            <a href="{{ post.get_absolute_url }}">Подробнее</a>
+                            <br>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section class="categories">
+            <div class="container">
+                <h2>Категории товаров</h2>
+                <ul>
+                    {% for c in cats %}
+                        <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </main>
+{% endblock %}

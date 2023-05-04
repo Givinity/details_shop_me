@@ -124,3 +124,17 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+class Search(ListView):
+
+    template_name = 'pages/index.html'
+    context_object_name = 'posts'
+
+    def get_queryset(self):
+        return Details.objects.filter(name__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
