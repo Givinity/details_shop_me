@@ -7,5 +7,5 @@ class Cart_user(LoginRequiredMixin, TemplateView):
     """
     Корзина для покупок
     """
-    template_name = 'pages/cart.html'
+    template_name = 'cart/cart.html'
     login_url = reverse_lazy('login')
