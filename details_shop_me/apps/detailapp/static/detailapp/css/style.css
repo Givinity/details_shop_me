@@ -132,3 +132,9 @@ footer p {
   display: block;
   margin-top: 0em;
 }
+.cart_notfound {
+  text-align: center;
+}
+.trash img {
+  max-width: 1.5rem;
+}

@@ -1,7 +1,8 @@
 {% extends 'pages/base.html' %}
+{% load static %}
 {% block content %}
-    <h2>Your Cart</h2>
-    <table>
+    <h2>Корзина покупок</h2>
+    <table style="background: gainsboro">
         <thead>
             <tr>
                 <th>Product</th>
@@ -10,13 +11,25 @@
             </tr>
         </thead>
         <tbody>
+        {% if cart_items %}
             {% for item in cart_items %}
                 <tr>
                     <td>{{ item.product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.product.price }}</td>
+                    <td>{{ item.quantity }} шт.</td>
+                    <td>{{ item.product.price }} руб.</td>
+                    <td><a href="{% url 'cart_del' item.id %}" class="trash">
+                    <img src="{% static 'detailapp/image/trash.png' %}" alt="Удалить">
+                </a></td>
                 </tr>
             {% endfor %}
+        {% else %}
+            <h1 class="cart_notfound">Корзина пуста</h1>
+        {% endif %}
         </tbody>
     </table>
+    <hr>
+    <h1>Итоговая сумма: {{ my_price }} руб.</h1>
+    <button class="add-to-cart">Оформить заказ</button>
+    <br>
+    <br>
 {% endblock %}

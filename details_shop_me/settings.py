@@ -16,7 +16,6 @@ from dotenv import load_dotenv
 
 from details_shop_me.apps import detailapp
 
-CART_SESSION_ID = 'cart'
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
