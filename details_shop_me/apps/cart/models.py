@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from details_shop_me.apps.detailapp.models import Details
 
+
 class Basket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Details, on_delete=models.CASCADE)

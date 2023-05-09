@@ -21,13 +21,12 @@ class Cart_user(DataMixin, LoginRequiredMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Корзина')
-        context['my_price'] = sum([item.product.price for item in self.get_queryset()])
+        context['my_price'] = sum([item.product.price * item.quantity for item in self.get_queryset()])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
     def get_queryset(self):
         return Basket.objects.filter(user=self.request.user)
-
 
 
 def cart_add(request, product_id):
@@ -43,6 +42,7 @@ def cart_add(request, product_id):
         cart.save()
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
 
 def cart_del(request, cart_id):
     cart = Basket.objects.get(id=cart_id)
