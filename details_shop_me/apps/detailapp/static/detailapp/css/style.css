@@ -160,3 +160,9 @@ footer p {
   border-radius: 0 5px 5px 0;
   cursor: pointer;
 }
+.cart_notfound {
+  text-align: center;
+}
+.trash img {
+  max-width: 1.5rem;
+}

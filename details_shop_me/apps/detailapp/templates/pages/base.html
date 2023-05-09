@@ -22,7 +22,7 @@
             {% else %}
                 <li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a></li>
             {% endif %}
-        <a class="cart" href="{% url 'cart' %}">
+        <a class="cart" href="{% url 'cart_user' %}">
              <img src="{% static 'detailapp/image/cart.png' %}" alt="Корзина">
         </a>
       </nav>

@@ -1,6 +1,6 @@
+.idea
 .media
 /.env
-.idea
 *.pyc
 /media/
 /details_shop_me/apps/detailapp/migrations/
