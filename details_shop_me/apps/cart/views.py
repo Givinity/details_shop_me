@@ -1,9 +1,6 @@
-from urllib import request
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.urls import reverse_lazy
-from django.contrib.auth.models import User
 from django.shortcuts import HttpResponseRedirect
 from .models import Basket
 from details_shop_me.apps.detailapp.urls import DataMixin
@@ -37,15 +34,14 @@ def cart_add(request, product_id):
         Basket.objects.create(user=request.user, product=product,
                               quantity=1)
     else:
-        cart = carts.first()
-        cart.quantity += 1
-        cart.save()
+        basket = carts.first()
+        basket.quantity += 1
+        basket.save()
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 def cart_del(request, cart_id):
-    cart = Basket.objects.get(id=cart_id)
-    cart.delete()
+    basket = Basket.objects.get(id=cart_id)
+    basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
-

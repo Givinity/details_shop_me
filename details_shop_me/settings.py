@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-from details_shop_me.apps import detailapp
+from details_shop_me.apps import detailapp, cart
 
 load_dotenv()
 
@@ -88,7 +88,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASS'),
         'HOST': 'localhost',
         'PORT': '5432',
-    }
+    },
 }
 
 # Password validation
