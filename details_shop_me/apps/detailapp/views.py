@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import generics
 
 from .forms import RegisterUserForm, LoginUserForm
+from .serializers import DetailsSerializer
 from .utils import DataMixin
 from .models import Details
 from django.contrib.auth.views import LoginView
@@ -142,3 +146,64 @@ class Search(DataMixin, ListView):
                                             str(context['q']))
         context = dict(list(context.items()) + list(c_def.items()))
         return context
+
+
+# class ListDetailsAPI(generics.ListAPIView):
+#     queryset = Details.objects.all()
+#     serializer_class = ListDetailsSerializer
+
+class ListAPIDetails(generics.ListCreateAPIView):
+    """
+    Create and view model in JSON data
+    """
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
+
+class UpdateAPIDetails(generics.UpdateAPIView):
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
+
+class ViewAPIDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
+
+# class ListDetailsAPI(APIView):
+#     def get(self, request):
+#         w = Details.objects.all()
+#         return Response({'posts': DetailsSerializer(w,
+#                                                     many=True).data})
+#
+#     def post(self, request):
+#         serializer = DetailsSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#
+#         return Response({'post': serializer.data})
+#
+#     def put(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk', None)
+#         if not pk:
+#             return Response({'error':'Method PUT not allowed'})
+#
+#         try:
+#             instance = Details.objects.get(pk=pk)
+#         except:
+#             return Response({'error': 'Object does not exists'})
+#
+#         serializer = DetailsSerializer(data=request.data, instance=instance)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response({'post': serializer.data})
+#
+#     def delete(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk', None)
+#         if not pk:
+#             return Response({'error': 'Method PUT not allowed'})
+#
+#         try:
+#             instance = Details.objects.get(pk=pk)
+#         except:
+#             return Response({'error': 'Object does not exists'})
+#
+#         instance.delete()
+#         return Response({'post': 'delete post '+str(pk)})

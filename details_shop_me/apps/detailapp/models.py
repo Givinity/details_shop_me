@@ -11,7 +11,7 @@ class Details(models.Model):
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
     content = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d')
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     published_or_not = models.BooleanField(default=True)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
 

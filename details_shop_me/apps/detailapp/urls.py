@@ -13,4 +13,7 @@ urlpatterns = [
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
     path('search/', Search.as_view(), name='search'),
+    path('api/v1/listdetails/', ListAPIDetails.as_view()),
+    path('api/v1/listdetails/<int:pk>', UpdateAPIDetails.as_view()),
+    path('api/v1/viewdetails/<int:pk>', ViewAPIDetails.as_view()),
 ]
