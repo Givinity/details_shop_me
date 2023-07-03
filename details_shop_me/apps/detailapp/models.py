@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 
@@ -14,6 +15,8 @@ class Details(models.Model):
     photo = models.ImageField(upload_to='photos/%Y/%m/%d', blank=True)
     published_or_not = models.BooleanField(default=True)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+    user = models.ForeignKey(User, verbose_name='Пользователь',
+                             on_delete=models.CASCADE )
 
     def __str__(self):
         return self.name

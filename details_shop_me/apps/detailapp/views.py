@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics, viewsets
+from rest_framework import generics, viewsets, mixins
+from rest_framework.viewsets import GenericViewSet
 
 from .forms import RegisterUserForm, LoginUserForm
 from .serializers import DetailsSerializer
 from .utils import DataMixin
-from .models import Details
+from .models import Details, Category
 from django.contrib.auth.views import LoginView
 from django.views.generic import ListView, TemplateView, CreateView, DetailView
 
@@ -167,6 +169,25 @@ class Search(DataMixin, ListView):
 #     queryset = Details.objects.all()
 #     serializer_class = DetailsSerializer
 
-class DetailsViewSet(viewsets.ModelViewSet):
-    queryset = Details.objects.all()
+class DetailsViewSet(mixins.CreateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.DestroyModelMixin,
+                     mixins.ListModelMixin,
+                     GenericViewSet):
+    # queryset = Details.objects.all()
     serializer_class = DetailsSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        if not pk:
+            return Details.objects.all()[:3]
+        return Details.objects.filter(pk=pk)
+
+    @action(methods=['get'], detail=True)
+    def category(self, request, pk=None):
+        if not pk:
+            cats = Category.objects.all()
+            return Response({'cats': [c.name for c in cats]})
+        cats = Category.objects.get(pk=pk)
+        return Response({'cats': cats.name})
