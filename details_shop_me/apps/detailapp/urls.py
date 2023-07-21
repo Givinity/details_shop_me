@@ -3,22 +3,22 @@ from django.urls import path, include
 from details_shop_me.apps.detailapp.views import *
 from rest_framework import routers
 
-class MyCustomRouter(routers.SimpleRouter):
-    routes = [
-        routers.Route(url=r'^{prefix}$',
-                      mapping={'get': 'list'},
-                      name='{basename}-list',
-                      detail=False,
-                      initkwargs={'suffix': 'List'}),
-        routers.Route(url=r'^{prefix}/{lookup}$',
-                      mapping={'get': 'retrieve'},
-                      name='{basename}-detail',
-                      detail=True,
-                      initkwargs={'suffix': 'Detail'})
-    ]
-
-router = MyCustomRouter()
-router.register(r'detail', DetailsViewSet, basename='detail')
+# class MyCustomRouter(routers.SimpleRouter):
+#     routes = [
+#         routers.Route(url=r'^{prefix}$',
+#                       mapping={'get': 'list'},
+#                       name='{basename}-list',
+#                       detail=False,
+#                       initkwargs={'suffix': 'List'}),
+#         routers.Route(url=r'^{prefix}/{lookup}$',
+#                       mapping={'get': 'retrieve'},
+#                       name='{basename}-detail',
+#                       detail=True,
+#                       initkwargs={'suffix': 'Detail'})
+#     ]
+#
+# router = MyCustomRouter()
+# router.register(r'detail', DetailsViewSet, basename='detail')
 
 urlpatterns = [
     path('', IndexView.as_view(), name='index'),
@@ -31,8 +31,8 @@ urlpatterns = [
     path('login/', LoginUser.as_view(), name='login'),
     path('logout/', logout_user, name='logout'),
     path('search/', Search.as_view(), name='search'),
-    path('api/v1/', include(router.urls)),
-    # path('api/v1/listdetails/', DetailsViewSet.as_view({'get': 'list'})),
-    # path('api/v1/listdetails/<int:pk>', DetailsViewSet.as_view({'put': 'update'})),
-    # path('api/v1/viewdetails/<int:pk>', DetailsViewSet.as_view({'get': 'retrieve'})),
+    # path('api/v1/', include(router.urls)),
+    path('api/v1/listdetails/', ListAPIDetails.as_view()),
+    path('api/v1/listdetails/<int:pk>', UpdateAPIDetails.as_view()),
+    path('api/v1/viewdetails/<int:pk>', ViewAPIDetails.as_view()),
 ]

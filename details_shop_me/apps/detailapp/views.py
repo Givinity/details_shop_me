@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, viewsets, mixins
 from rest_framework.viewsets import GenericViewSet
 
 from .forms import RegisterUserForm, LoginUserForm
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from .serializers import DetailsSerializer
 from .utils import DataMixin
 from .models import Details, Category
@@ -150,44 +152,45 @@ class Search(DataMixin, ListView):
         return context
 
 
-# class ListDetailsAPI(generics.ListAPIView):
-#     queryset = Details.objects.all()
-#     serializer_class = ListDetailsSerializer
-
-# class ListAPIDetails(generics.ListCreateAPIView):
-#     """
-#     Create and view model in JSON data
-#     """
-#     queryset = Details.objects.all()
-#     serializer_class = DetailsSerializer
-#
-# class UpdateAPIDetails(generics.UpdateAPIView):
-#     queryset = Details.objects.all()
-#     serializer_class = DetailsSerializer
-#
-# class ViewAPIDetails(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Details.objects.all()
-#     serializer_class = DetailsSerializer
-
-class DetailsViewSet(mixins.CreateModelMixin,
-                     mixins.RetrieveModelMixin,
-                     mixins.UpdateModelMixin,
-                     mixins.DestroyModelMixin,
-                     mixins.ListModelMixin,
-                     GenericViewSet):
-    # queryset = Details.objects.all()
+class ListAPIDetails(generics.ListCreateAPIView):
+    """
+    Create and view model in JSON data
+    """
+    queryset = Details.objects.all()
     serializer_class = DetailsSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
-    def get_queryset(self):
-        pk = self.kwargs.get('pk')
-        if not pk:
-            return Details.objects.all()[:3]
-        return Details.objects.filter(pk=pk)
 
-    @action(methods=['get'], detail=True)
-    def category(self, request, pk=None):
-        if not pk:
-            cats = Category.objects.all()
-            return Response({'cats': [c.name for c in cats]})
-        cats = Category.objects.get(pk=pk)
-        return Response({'cats': cats.name})
+class UpdateAPIDetails(generics.RetrieveUpdateAPIView):
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
+    permission_classes = (IsOwnerOrReadOnly, )
+
+
+class ViewAPIDetails(generics.RetrieveDestroyAPIView):
+    queryset = Details.objects.all()
+    serializer_class = DetailsSerializer
+    permission_classes = (IsAdminOrReadOnly, )
+
+# class DetailsViewSet(mixins.CreateModelMixin,
+#                      mixins.RetrieveModelMixin,
+#                      mixins.UpdateModelMixin,
+#                      mixins.DestroyModelMixin,
+#                      mixins.ListModelMixin,
+#                      GenericViewSet):
+#     # queryset = Details.objects.all()
+#     serializer_class = DetailsSerializer
+#
+#     def get_queryset(self):
+#         pk = self.kwargs.get('pk')
+#         if not pk:
+#             return Details.objects.all()[:3]
+#         return Details.objects.filter(pk=pk)
+#
+#     @action(methods=['get'], detail=True)
+#     def category(self, request, pk=None):
+#         if not pk:
+#             cats = Category.objects.all()
+#             return Response({'cats': [c.name for c in cats]})
+#         cats = Category.objects.get(pk=pk)
+#         return Response({'cats': cats.name})
