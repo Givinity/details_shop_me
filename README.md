@@ -26,3 +26,9 @@ Poetry
 Django
 PostgreSQL
 DRF
+
+Contributing
+Contributions to the project are welcome! To contribute, please fork the repository and create a pull request.
+
+License
+This project is licensed under the MIT License. Feel free to use, modify, and distribute the code as you see fit.
