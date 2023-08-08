@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 
 from details_shop_me.apps.detailapp.views import *
 from rest_framework import routers
@@ -35,4 +35,7 @@ urlpatterns = [
     path('api/v1/listdetails/', ListAPIDetails.as_view()),
     path('api/v1/listdetails/<int:pk>', UpdateAPIDetails.as_view()),
     path('api/v1/viewdetails/<int:pk>', ViewAPIDetails.as_view()),
+    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]

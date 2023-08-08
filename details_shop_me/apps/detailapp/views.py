@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, login
 from django.urls import reverse_lazy
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, viewsets, mixins
@@ -164,7 +164,7 @@ class ListAPIDetails(generics.ListCreateAPIView):
 class UpdateAPIDetails(generics.RetrieveUpdateAPIView):
     queryset = Details.objects.all()
     serializer_class = DetailsSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (IsAuthenticated, )
 
 
 class ViewAPIDetails(generics.RetrieveDestroyAPIView):

@@ -16,7 +16,7 @@ class Details(models.Model):
     published_or_not = models.BooleanField(default=True)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
     user = models.ForeignKey(User, verbose_name='Пользователь',
-                             on_delete=models.CASCADE )
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
